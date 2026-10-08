@@ -2,6 +2,14 @@
 
 A KDE Plasma 6 desktop widget with a spinning vinyl, your Spotify album art, a blurred cover background and playback controls. Show and hide it with a keybind.
 
+## About this project
+
+This is just a fun personal project, shared as part of my learning journey rather than as a polished product.
+
+I'm still learning Linux and coding. I built this with a lot of help from AI (Claude): I came up with the idea, tested everything on my own machine, and kept tweaking it until it looked and felt right, but the AI wrote most of the code. I'm posting it to document the experience and in case someone else finds it useful.
+
+It works on my setup (Kubuntu, Plasma 6, Spotify), but I can't promise it will work on yours. Feel free to use it, change it, or learn from it.
+
 ## Requirements
 
 - KDE Plasma 6
