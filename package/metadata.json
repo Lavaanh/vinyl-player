@@ -1,0 +1,13 @@
+{
+  "KPlugin": {
+    "Id": "org.example.vinyl",
+    "Name": "Vinyl Player",
+    "Description": "Spinning vinyl with Spotify cover art",
+    "Icon": "media-optical",
+    "Authors": [{ "Name": "Lavaanh" }],
+    "Version": "1.0",
+    "License": "MIT"
+  },
+  "KPackageStructure": "Plasma/Applet",
+  "X-Plasma-API-Minimum-Version": "6.0"
+}

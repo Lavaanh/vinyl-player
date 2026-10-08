@@ -1,0 +1,3 @@
+#!/bin/bash
+f="$HOME/.cache/vinyl-visible"
+if [ "$(cat "$f" 2>/dev/null)" = "1" ]; then echo 0 > "$f"; else echo 1 > "$f"; fi
