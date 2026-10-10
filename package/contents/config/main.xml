@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0 http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+  <kcfgfile name=""/>
+  <group name="General">
+    <entry name="popupOnSongChange" type="Bool"><default>true</default></entry>
+    <entry name="popupSeconds" type="Int"><default>4</default></entry>
+    <entry name="showTonearm" type="Bool"><default>false</default></entry>
+    <entry name="bgOpacity" type="Double"><default>1.0</default></entry>
+    <entry name="bgBlur" type="Double"><default>1.0</default></entry>
+    <entry name="bgDim" type="Double"><default>0.45</default></entry>
+    <entry name="useAlbumBg" type="Bool"><default>true</default></entry>
+    <entry name="bgColor" type="String"><default>#000000</default></entry>
+  </group>
+</kcfg>

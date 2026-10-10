@@ -4,6 +4,8 @@ cd "$(dirname "$0")"
 FLAG="$HOME/.cache/vinyl-visible"
 mkdir -p ~/.local/bin ~/.cache ~/.config/plasma-workspace/env
 install -m 755 vinyl-toggle ~/.local/bin/vinyl-toggle
+install -m 755 vinyl-follow ~/.local/bin/vinyl-follow
+install -m 755 vinyl-follow ~/.local/bin/vinyl-follow
 echo 'export QML_XHR_ALLOW_FILE_READ=1' > ~/.config/plasma-workspace/env/vinyl.sh
 echo 0 > "$FLAG"
 tmp=$(mktemp -d)

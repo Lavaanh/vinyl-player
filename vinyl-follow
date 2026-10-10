@@ -1,0 +1,4 @@
+#!/bin/bash
+pkill -f "playerctl -p spotify --follow status" 2>/dev/null
+f="$HOME/.cache/vinyl-status"
+playerctl -p spotify --follow status 2>/dev/null | while read -r s; do echo "$s" > "$f"; done
