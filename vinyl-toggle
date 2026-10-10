@@ -1,3 +1,10 @@
 #!/bin/bash
 f="$HOME/.cache/vinyl-visible"
-if [ "$(cat "$f" 2>/dev/null)" = "1" ]; then echo 0 > "$f"; else echo 1 > "$f"; fi
+if [ "$(cat "$f" 2>/dev/null)" = "1" ]; then
+    echo 0 > "$f"
+else
+    echo 1 > "$f"
+    if ! pgrep -x spotify > /dev/null; then
+        setsid spotify > /dev/null 2>&1 &
+    fi
+fi
