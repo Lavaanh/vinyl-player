@@ -60,7 +60,8 @@ PlasmoidItem {
         function run(cmd) { connectSource(cmd + " #" + Date.now()) }
     }
 
-    function ctl(args) { runner.run("playerctl -p spotify " + args) }
+    property double lockUntil: 0
+    function ctl(args) { root.lockUntil = Date.now() + 1500; runner.run("playerctl -p spotify " + args) }
 
     // ---- polls Spotify every second ----
     Plasma5Support.DataSource {
@@ -80,11 +81,11 @@ PlasmoidItem {
             }
             const p = out.split("~|~")
             if (p.length < 8) return
-            root.playing = p[0] === "Playing"
+            if (Date.now() > root.lockUntil) root.playing = p[0] === "Playing"
             root.position = Number(p[1]) / 1000000
             root.length = Number(p[2]) / 1000000
-            root.shuffle = p[3].toLowerCase() === "true"
-            root.loopMode = p[4]
+            if (Date.now() > root.lockUntil) root.shuffle = p[3].toLowerCase() === "true"
+            if (Date.now() > root.lockUntil) root.loopMode = p[4]
             root.artUrl = p[5]
             root.artist = p[6]
             root.title = p.slice(7).join("~|~")
@@ -191,13 +192,15 @@ PlasmoidItem {
             height: width
             anchors.centerIn: stage
 
-            RotationAnimator on rotation {
-                from: 0
-                to: 360
-                duration: 6000
-                loops: Animation.Infinite
-                running: true
-                paused: !root.playing
+            // spin speed eases toward 1 while playing and toward 0 when paused
+            property real spinSpeed: root.playing ? 1 : 0
+            Behavior on spinSpeed {
+                NumberAnimation { duration: 1500; easing.type: Easing.OutCubic }
+            }
+            // 60 degrees per second at full speed (one turn per 6s)
+            FrameAnimation {
+                running: root.playing || disc.spinSpeed > 0.001
+                onTriggered: disc.rotation = (disc.rotation + frameTime * 60 * disc.spinSpeed) % 360
             }
 
             Rectangle {
