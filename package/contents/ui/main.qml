@@ -45,6 +45,23 @@ PlasmoidItem {
         }
     }
 
+    // ---- instant play/pause status from the listener script ----
+    Component.onCompleted: runner.run("setsid -f ~/.local/bin/vinyl-follow > /dev/null 2>&1")
+    Timer {
+        interval: 100
+        running: true
+        repeat: true
+        onTriggered: {
+            var y = new XMLHttpRequest()
+            y.open("GET", "file://" + "__FLAG_FILE__".replace("vinyl-visible", "vinyl-status"))
+            y.onreadystatechange = function () {
+                if (y.readyState === 4 && (y.responseText || "") !== "" && Date.now() > root.lockUntil)
+                    root.playing = y.responseText.trim() === "Playing"
+            }
+            y.send()
+        }
+    }
+
     function fmt(s) {
         s = Math.max(0, Math.floor(s))
         const m = Math.floor(s / 60)
@@ -81,7 +98,7 @@ PlasmoidItem {
             }
             const p = out.split("~|~")
             if (p.length < 8) return
-            if (Date.now() > root.lockUntil) root.playing = p[0] === "Playing"
+            // play/pause now comes from the fast listener (vinyl-status)
             root.position = Number(p[1]) / 1000000
             root.length = Number(p[2]) / 1000000
             if (Date.now() > root.lockUntil) root.shuffle = p[3].toLowerCase() === "true"
